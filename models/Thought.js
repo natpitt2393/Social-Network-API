@@ -5,7 +5,12 @@ const dateFormat = require('../utils/dateFormat');
 const thoughtSchema = new Schema(
   {
     // TODO: add thoughtText
-
+    thoughtText: {
+      type: String,
+      required: true,
+      maxlength: 280,
+      minlength: 1
+    }
     // TODO: add createdAt
 
     // TODO: add username
