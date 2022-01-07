@@ -10,7 +10,6 @@ const thoughtSchema = new Schema(
       maxlength: 280,
       minlength: 1
     },
-    // TODO: add createdAt
     createdAt: {
       type: Date,
       default: Date.now,
@@ -20,11 +19,13 @@ const thoughtSchema = new Schema(
       type: String,
       required: true
     },
-    // TODO: add reactions
-
+    reactions: [reactionSchema]
   },
   {
-    // TODO: Add toJSON option
+    toJSON: {
+      getters: true
+    },
+    id: false
   }
 );
 
