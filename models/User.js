@@ -2,10 +2,18 @@ const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema(
   {
-    // TODO: create username field
-
-    // TODO: create email field
-    
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+      trim: true
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+      validate: [validateEmail, "Please enter a valid email address."],
+    },
     thoughts: [
       {
         type: Schema.Types.ObjectId,
