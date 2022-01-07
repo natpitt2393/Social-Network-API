@@ -14,10 +14,12 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      
-    }
-    // TODO: add username
-
+      get: timestamp => dateFormat(timestamp)
+    },
+    username: {
+      type: String,
+      required: true
+    },
     // TODO: add reactions
 
   },
