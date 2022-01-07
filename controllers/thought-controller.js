@@ -3,7 +3,6 @@ const { Thought, User } = require('../models');
 const thoughtController = {
   // get all thoughts
   getThoughts(req, res) {
-    // TODO: Your code here
     Thought.find()
     .then((thoughts) => res.json(thoughts))
     .catch((err) => res.status(500).json(err));
@@ -11,7 +10,6 @@ const thoughtController = {
   
   // get single thought by id
   getSingleThought(req, res) {
-    // TODO: Your code
     Thought.findOne({ _id: req.params.thoughtId})
     .select('-__v')
       .then((thought) =>
@@ -25,14 +23,44 @@ const thoughtController = {
 
   // create a thought
   createThought(req, res) {
-    // TODO: create a thought and add the thought to user's thoughts array
-
+    Thought.create(req.body)
+    .then((thought) => {
+        return User.findOneAndUpdate(
+            { _id: req.body.userID },
+            { $addToSet: { thoughts: thought._id } },
+            { new: true }
+        );    
+    })
+    .then((thought) =>
+        !thought
+          ? res.status(404).json({
+              message: 'Thought created, but found no user with that ID',
+            })
+          : res.json('Created the thought!!!')
+      )
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
   },
 
   // update thought
   updateThought(req, res) {
     // TODO: update thought
-
+    Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $set: req.body },
+        { runValidators: true, new: true }
+      )
+        .then((thought) =>
+          !thought
+            ? res.status(404).json({ message: 'No thought with this id!' })
+            : res.json(application)
+        )
+        .catch((err) => {
+          console.log(err);
+          res.status(500).json(err);
+        });
   },
 
   // delete thought
