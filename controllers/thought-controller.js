@@ -12,7 +12,15 @@ const thoughtController = {
   // get single thought by id
   getSingleThought(req, res) {
     // TODO: Your code
-    Thought.findOne({ _id: req.params.})
+    Thought.findOne({ _id: req.params.thoughtId})
+    .select('-__v')
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: 'No thought with that ID' })
+          : res.json(thought)
+      )
+      .catch((err) => res.status(500).json(err));
+
   },
 
   // create a thought
