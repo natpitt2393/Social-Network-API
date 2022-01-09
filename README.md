@@ -7,7 +7,6 @@
   ## Table of Contents
   * [Installation](#installation)
   * [Usage](#usage)
-  * [Bugs](#bugs)
   * [License](#license)
   * [Questions](#questions)
   * [Media](#media)
@@ -17,8 +16,6 @@
   The User Must install node first. Then they must install express (to run the server) and mongoose to use the mongoose ODM.
   ## Usage 
   You will need to run npm init -y and npm i express and npm i mongoose. 
-  ## Bugs
-  Could not successfully delete reaction.
   ## License 
   This project is license under MIT License
   
@@ -27,6 +24,7 @@
   If you have any questions about this projects, please contact me directly at nathaniel.epstein@gmail.com. You can view more of my projects at https://github.com/natpitt2393.
 
   ## Media
+  ![Social-Network-API](./assets/DELETEREACTION.gif)
   ![Social-Network-API](./assets/NPMSTART.gif)
   ![Social-Network-API](./assets/CRUDTHOUGHT.gif)
   ![Social-Network-API](./assets/CRUDUSER.gif)
