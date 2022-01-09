@@ -51,11 +51,12 @@ const thoughtController = {
         { $set: req.body },
         { runValidators: true, new: true }
       )
-        .then((thought) =>
-          !thought
-            ? res.status(404).json({ message: 'No thought with this id!' })
-            : res.json(application)
-        )
+      .then((thought) => {
+        if (!thought) {
+          return res.status(404).json({ message: 'No user with this id!' });
+        }
+        res.json(thought);
+      })
         .catch((err) => {
           console.log(err);
           res.status(500).json(err);
@@ -79,7 +80,7 @@ const thoughtController = {
       })
       .then((dbUserData) => {
         if (!dbUserData) {
-          return res.status(404).json({ message: 'Thought created but no user with this id!' });
+          return res.status(404).json({ message: 'Thought deleted but no user with this id!' });
         }
         res.json({ message: 'Thought successfully deleted!' });
       })
